@@ -2,6 +2,7 @@
 import { VueFlow } from "@vue-flow/core";
 
 import CustomNode from "../components/nodes/CustomNode.vue";
+import { Background } from "@vue-flow/background";
 
 const elements = ref([
   // nodes
@@ -102,6 +103,8 @@ const elements = ref([
       <pre>{{ nodeProps }}</pre>
       <CustomNode :message="nodeProps.data.hello" v-bind="nodeProps" />
     </template>
+
+    <Background />
   </VueFlow>
 </template>
 
