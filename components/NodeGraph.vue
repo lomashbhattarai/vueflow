@@ -2,12 +2,10 @@
 import { VueFlow } from "@vue-flow/core";
 
 import CustomNode from "../components/nodes/CustomNode.vue";
-// import SpecialEdge from "./components/SpecialEdge.vue";
 
 const elements = ref([
   // nodes
 
-  // an input node, specified by using `type: 'input'`
   {
     id: "1",
     type: "input",
@@ -40,7 +38,6 @@ const elements = ref([
     targetPosition: "left",
   },
 
-  // An output node, specified by using `type: 'output'`
   {
     id: "4",
     type: "output",
@@ -81,25 +78,13 @@ const elements = ref([
 
   // edges
 
-  // consists of an id, source-id and target-id
-  // { id: "e1-3", source: "1", target: "3" },
-
   // an animated edge, specified by using `animated: true`
   { id: "e1-2", source: "1", target: "3", animated: true },
 
-  // a custom edge, specified by using a custom type name
-  // we choose `type: 'special'` for this example
   {
     id: "e1-4",
-    // type: "special",
     source: "1",
     target: "4",
-
-    // pass custom data to the edge
-    data: {
-      // You can pass any data you want to the edge
-      hello: "world",
-    },
   },
   { id: "e1-5", source: "1", target: "parent-1", animated: true },
   { id: "e2-5", source: "2", target: "5", animated: true },
@@ -110,18 +95,12 @@ const elements = ref([
 <template>
   <VueFlow v-model="elements">
     <!-- bind your custom node type to a component by using slots, slot names are always `node-<type>` -->
-    <template #node-custom-node-1="specialNodeProps">
-      <CustomNode
-        :message="specialNodeProps.data.hello"
-        v-bind="specialNodeProps"
-      />
+    <template #node-custom-node-1="nodeProps">
+      <CustomNode :message="nodeProps.data.hello" v-bind="nodeProps" />
     </template>
-    <template #node-custom-node-2="specialNodeProps">
-      <pre>{{ specialNodeProps }}</pre>
-      <CustomNode
-        :message="specialNodeProps.data.hello"
-        v-bind="specialNodeProps"
-      />
+    <template #node-custom-node-2="nodeProps">
+      <pre>{{ nodeProps }}</pre>
+      <CustomNode :message="nodeProps.data.hello" v-bind="nodeProps" />
     </template>
   </VueFlow>
 </template>
